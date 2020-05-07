@@ -1,0 +1,49 @@
+{
+  "name": "apollo-graphql-covid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node build/server.js",
+    "test": "jest",
+    "tsc": "tsc",
+    "clean": "rimraf build",
+    "build": "npm-run-all clean tsc",
+    "lint": "eslint . --ext .ts",
+    "dev": "NODE_ENV=development npm-run-all build start",
+    "prod": "NODE_ENV=production npm-run-all build start",
+    "watch:dev": "nodemon -e ts,js"
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "src/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "apollo-datasource-rest": "^0.9.0",
+    "apollo-server": "^2.13.0",
+    "apollo-server-testing": "^2.13.0",
+    "graphql": "^15.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
+  }
+}
