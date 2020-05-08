@@ -1,34 +1,35 @@
 import { IResolvers } from "apollo-server"
-import { FormatArgs } from "../types/index";
+import { FormatArgs, DateFormatArgs, StateFormatArgs, StateDateFormatArgs } from "../types/index";
 
 const resolvers: IResolvers = {
+  Data: {
+    __resolveType(data, context, info){
+      if(data.checkTimeEt){
+        return 'StateData';
+      }
+      if(data.states){
+        return 'USHistoricalData';
+      }
+      if(data.state && data.date){
+        return 'StateHistoricalData'
+      }
+      return 'USData';
+    },
+  },
   Query: {
     USCurrent: (root, args: FormatArgs, context) => context.dataSources.covidAPI.getUSCurrent(args.format),
-    // USDaily: (root, args, context) => null,
-    // USDate: (root, args, context) => null,
-    // StatesCurrent: (root, args, context) => null,
-    // StateCurrent: (root, args, context) => null,
-    // StatesDaily: (root, args, context) => null,
-    // StateDaily: (root, args, context) => null,
-    // StateDate: (root, args, context) => null,
-    // StatesInfo: (root, args, context) => null,
-    // Counties: (root, args, context) => null,
-    // CDC: (root, args, context) => null,
-    // urls: (root, args, context) => null,
-    // screenshots: (root, args, context) => null,
-
-    // USDaily(format: Format!): [USHistoricalData]!
-    // USDate(date: String!, format: Format!): USHistoricalData!
-    // StatesCurrent(format: Format!): [StateData]!
-    // StateCurrent(state: String!, format: Format!): StateData!
-    // StatesDaily(format: Format!): [StateHistoricalData]!
-    // StateDaily(state: String!, format: Format!): [StateHistoricalData]!
-    // StateDate(state: String!, date: String!, format: Format!): StateHistoricalData!
-    // StatesInfo(format: Format!): [StateInfo]!
-    // Counties(format: Format!): [CountyInfo]!
-    // CDC: [CDCData]!
-    // urls: [TrackerInfo]!
-    // screenshots: [ScreenshotInfo]!
+    USDaily: (root, args: FormatArgs, context) => context.dataSources.covidAPI.getUSDaily(args.format),
+    USDate: (root, args: DateFormatArgs, context) => context.dataSources.covidAPI.getUSDate(args.date, args.format),
+    StatesCurrent: (root, args: FormatArgs, context) => context.dataSources.covidAPI.getStatesCurrent(args.format),
+    StateCurrent: (root, args: StateFormatArgs, context) => context.dataSources.covidAPI.getStateCurrent(args.state, args.format),
+    StatesDaily: (root, args: FormatArgs, context) => context.dataSources.covidAPI.getStatesDaily(args.format),
+    StateDaily: (root, args: StateFormatArgs, context) => context.dataSources.covidAPI.getStateDaily(args.state, args.format),
+    StateDate: (root, args: StateDateFormatArgs, context) => context.dataSources.covidAPI.getStateDate(args.state, args.date, args.format),
+    StatesInfo: (root, args: FormatArgs, context) => context.dataSources.covidAPI.getStatesInfo(args.format),
+    Counties: (root, args: FormatArgs, context) => context.dataSources.covidAPI.getCounties(args.format),
+    CDC: (root, args, context) => context.dataSources.covidAPI.getCDC(),
+    urls: (root, args, context) => context.dataSources.covidAPI.getUrls(),
+    screenshots: (root, args, context) => context.dataSources.covidAPI.getScreenshots(),
   }
 }
 

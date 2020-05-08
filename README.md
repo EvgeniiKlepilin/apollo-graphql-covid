@@ -28,6 +28,382 @@ npm run watch:dev
 
 Once the command finishes execution, you should see that your server is available at http://localhost:4000/graphql. You should be able to see GraphiQL interface to interact with the API.
 
+## Available Queries
+
+```graphql
+query getUSData {
+  USCurrent(format: json) {
+    ...usDataFields
+  }
+}
+
+fragment usDataFields on USData {
+  positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+}
+```
+
+```graphql
+query getUSDaily {
+  USDaily(format: json) {
+    ...usHistoricalDataFields
+  }
+}
+
+fragment usHistoricalDataFields on USHistoricalData {
+  positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+  date
+  deathIncrease
+  hospitalizedIncrease
+  negativeIncrease
+  positiveIncrease
+  totalTestResultsIncrease
+  lastUpdateEt
+  dataQualityGrade
+  states
+  dateChecked
+}
+```
+
+```graphql
+query getUSDate {
+  USDate(date: "20200507", format: json) {
+    ...usHistoricalDataFields
+  }
+}
+
+fragment usHistoricalDataFields on USHistoricalData {
+  positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+  date
+  deathIncrease
+  hospitalizedIncrease
+  negativeIncrease
+  positiveIncrease
+  totalTestResultsIncrease
+  lastUpdateEt
+  dataQualityGrade
+  states
+  dateChecked
+}
+```
+
+```graphql
+query getStatesCurrent {
+  StatesCurrent(format: json) {
+    ...statesDataFields
+  }
+}
+
+fragment statesDataFields on StateData {
+	positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+  state
+  positiveScore
+  negativeScore
+  dataQualityGrade
+  lastUpdateEt
+  checkTimeEt
+  fips
+  dateModified
+  dateChecked
+}
+```
+
+```graphql
+query getStateCurrent {
+  StateCurrent(state: "TX", format: json) {
+    ...statesDataFields
+  }
+}
+
+fragment statesDataFields on StateData {
+	positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+  state
+  positiveScore
+  negativeScore
+  dataQualityGrade
+  lastUpdateEt
+  checkTimeEt
+  fips
+  dateModified
+  dateChecked
+}
+```
+
+```graphql
+query getStatesDaily {
+  StatesDaily(format: json) {
+    ...stateHistoricalDataFields
+  }
+}
+
+fragment stateHistoricalDataFields on StateHistoricalData {
+  positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+  date
+  deathIncrease
+  hospitalizedIncrease
+  negativeIncrease
+  positiveIncrease
+  totalTestResultsIncrease
+  lastUpdateEt
+  dataQualityGrade
+  state
+  dateChecked
+  fips
+}
+```
+
+```graphql
+query getStateDaily {
+  StateDaily(state: "AZ", format: json) {
+    ...stateHistoricalDataFields
+  }
+}
+
+fragment stateHistoricalDataFields on StateHistoricalData {
+  positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+  date
+  deathIncrease
+  hospitalizedIncrease
+  negativeIncrease
+  positiveIncrease
+  totalTestResultsIncrease
+  lastUpdateEt
+  dataQualityGrade
+  state
+  dateChecked
+  fips
+}
+```
+
+```graphql
+query getStateDate {
+  StateDate(state: "NJ", date: "20200507" format: json) {
+    ...stateHistoricalDataFields
+  }
+}
+
+fragment stateHistoricalDataFields on StateHistoricalData {
+  positive
+  negative
+  pending
+  hospitalizedCurrently
+  hospitalizedCumulative
+  inIcuCurrently
+  inIcuCumulative
+  onVentilatorCurrently
+  onVentilatorCumulative
+  recovered
+  hash
+  lastModified
+  death
+  hospitalized
+  totalTestResults
+  notes
+  date
+  deathIncrease
+  hospitalizedIncrease
+  negativeIncrease
+  positiveIncrease
+  totalTestResultsIncrease
+  lastUpdateEt
+  dataQualityGrade
+  state
+  dateChecked
+  fips
+}
+```
+
+```graphql
+query getStatesInfo {
+  StatesInfo(format: json) {
+    ...stateInfoFields
+  }
+}
+
+fragment stateInfoFields on StateInfo {
+	state
+  name
+  covid19SiteOld
+  covid19Site
+  covid19SiteSecondary
+  twitter
+  pui
+  pum
+  notes
+  fips
+}
+```
+
+```graphql
+query getCounties {
+  Counties(format: json) {
+    ...countyFields
+  }
+}
+
+fragment countyFields on CountyInfo {
+	state
+  county
+  covid19Site
+  dataSite
+  mainSite
+  twitter
+  pui
+}
+```
+
+```graphql
+query getCDC {
+  CDC {
+    ...cdcDataFields
+  }
+}
+
+fragment cdcDataFields on CDCData {
+  dateCollected
+  cdcLabs
+  usPubHealthLabs
+  dailyTotal
+  lag
+}
+```
+
+```graphql
+query getUrls {
+  urls {
+    ...trackerInfoFields
+  }
+}
+
+fragment trackerInfoFields on TrackerInfo {
+  name
+  stateId
+  url
+  kind
+  filter
+}
+```
+
+```graphql
+query getScreenshots {
+  screenshots {
+    ...screenshotInfoFields
+  }
+}
+
+fragment screenshotInfoFields on ScreenshotInfo {
+  state
+  url
+  dateChecked
+  secondary
+  date
+  size
+}
+```
 
 ## Available NPM Scripts
 
@@ -35,7 +411,7 @@ Once the command finishes execution, you should see that your server is availabl
 {
   ...
   "scripts": {
-    "server": "node built/server.js",
+    "server": "node build/server.js",
     "test": "jest",
     "tsc": "tsc",
     "clean": "rimraf build",
