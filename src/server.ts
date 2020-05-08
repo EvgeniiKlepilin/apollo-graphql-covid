@@ -1,11 +1,19 @@
-import apollo = require('apollo-server');
-import typeDefs from './api';
+import { ApolloServer } from 'apollo-server';
+import typeDefs from './api/schema';
+import CovidAPI from './api/CovidAPI';
+import resolvers from './resolvers/index';
 
-const { ApolloServer } = apollo;
+import config from './config/index';
 
-const server = new ApolloServer({ typeDefs });
+const dataSources = () => ({
+  covidAPI: new CovidAPI(config.apiBaseUrl)
+});
 
-// TODO: continue with the tutorial https://www.apollographql.com/docs/tutorial/data-source/
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources,
+});
 
 server.listen().then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);

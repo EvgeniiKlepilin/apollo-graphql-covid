@@ -1,6 +1,4 @@
-import apollo = require('apollo-server');
-
-const { gql } = apollo;
+import { gql } from 'apollo-server';
 
 export default gql`
   interface Data {
