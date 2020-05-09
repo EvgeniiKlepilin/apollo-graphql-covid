@@ -175,16 +175,16 @@ export default gql`
   }
 
   type Query {
-    USCurrent(format: Format!): [USData]!
-    USDaily(format: Format!): [USHistoricalData]!
-    USDate(date: String!, format: Format!): USHistoricalData!
-    StatesCurrent(format: Format!): [StateData]!
-    StateCurrent(state: String!, format: Format!): StateData!
-    StatesDaily(format: Format!): [StateHistoricalData]!
-    StateDaily(state: String!, format: Format!): [StateHistoricalData]!
-    StateDate(state: String!, date: String!, format: Format!): StateHistoricalData!
-    StatesInfo(format: Format!): [StateInfo]!
-    Counties(format: Format!): [CountyInfo]!
+    USCurrent(format: Format! = json): [USData]!
+    USDaily(format: Format! = json): [USHistoricalData]!
+    USDate(date: String!, format: Format! = json): USHistoricalData!
+    StatesCurrent(format: Format! = json): [StateData]!
+    StateCurrent(state: String!, format: Format! = json): StateData!
+    StatesDaily(format: Format! = json): [StateHistoricalData]!
+    StateDaily(state: String!, format: Format! = json): [StateHistoricalData]!
+    StateDate(state: String!, date: String!, format: Format! = json): StateHistoricalData!
+    StatesInfo(format: Format! = json): [StateInfo]!
+    Counties(format: Format! = json): [CountyInfo]!
     CDC: [CDCData]!
     urls: [TrackerInfo]!
     screenshots: [ScreenshotInfo]!

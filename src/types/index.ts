@@ -1,3 +1,5 @@
+import CovidAPI from "../api/CovidAPI";
+
 export enum Format {
   JSON = 'json',
   CSV = 'csv'
@@ -34,7 +36,7 @@ interface HistoricalData {
   dateChecked: string;
 }
 
-export interface USData extends Data {}
+export type USData = Data
 
 export interface USHistoricalData extends Data, HistoricalData {
   states: number;
@@ -83,7 +85,7 @@ export interface StateInfo {
   covid19SiteSecondary: string;
   twitter: string;
   pui: string;
-  pum: Boolean;
+  pum: boolean;
   notes: string;
   fips: string;
 }
@@ -92,7 +94,7 @@ export interface ScreenshotInfo {
   state: string;
   url: string;
   dateChecked: string;
-  secondary: Boolean;
+  secondary: boolean;
   date: string;
   size: number;
 }
@@ -118,3 +120,11 @@ export interface StateFormatArgs extends FormatArgs {
 }
 
 export interface StateDateFormatArgs extends DateFormatArgs, StateFormatArgs {}
+
+export interface CovidDataSources {
+  covidAPI: CovidAPI;
+}
+
+export interface Context {
+  dataSources: CovidDataSources;
+}

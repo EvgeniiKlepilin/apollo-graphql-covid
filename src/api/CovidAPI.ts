@@ -56,7 +56,7 @@ class CovidAPI extends RESTDataSource {
       : [];
   }
 
-  async getStateDate(state: string, date: String, format: Format): Promise<StateHistoricalData> {
+  async getStateDate(state: string, date: string, format: Format): Promise<StateHistoricalData> {
     return StateHistoricalDataReducer(await this.get(`states/${state}/${date}.${format}`));
   }
 
